@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SMKN 5 Gowa</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      min-height: 150vh;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      background-color: #0d0d0d;
+      padding: 0.7rem 2rem;
+      border-bottom: 2px solid #00bfff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar img {
+      height: 45px;
+      margin-right: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      background-color: #1a1a1a;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #0d0d0d;
+      border: 1px solid #00bfff;
+      padding: 0.5rem 0;
+      z-index: 1001;
+      min-width: 180px;
+      top: 100%;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #111;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 140px;
+      padding-bottom: 50px;
+    }
+
+    .hero img {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      color: #00bfff;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="1000392451.png" alt="Logo SMKN 5 Gowa">
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <div class="dropdown">
+        <a href="features.html">Informasi ▼</a>
+        <div class="dropdown-content">
+          <a href="pengumuman.html">Pengumuman</a>
+          <a href="berita.html">Berita Sekolah</a>
+          <a href="agenda.html">Agenda Kegiatan</a>
+        </div>
+      </div>
+      <a href="smkn.html">Galeri</a>
+      <a href="community.html">Kontak</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <img src="1000392451.png" alt="Logo SMKN 5 Gowa">
+    <h1>Selamat Datang </h1>
+    <p>SMK Negeri 5 Gowa - Sulawesi Selatan</p>
+  </div>
+
+ <script>
+  const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
+  let currentPage = location.pathname.split("/").pop();
+  let currentIndex = pages.indexOf(currentPage);
+
+  window.addEventListener("scroll", () => {
+    const scrollPos = window.scrollY + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    if (scrollPos >= docHeight - 5) {
+      if (currentIndex >= 0 && currentIndex < pages.length - 1) {
+        window.location.href = pages[currentIndex + 1];
+      }
+    }
+  });
+</script>
+
+
+
+</body>
+</html>

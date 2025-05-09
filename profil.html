@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Profil Sekolah</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('bgsmk.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #00bfff;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #0d0d0d;
+      border: 1px solid #00bfff;
+      padding: 0.5rem 0;
+      z-index: 1001;
+      min-width: 180px;
+      top: 100%;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #111;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .content {
+      padding: 120px 2rem 2rem 2rem;
+      width: 100%;
+      background-color: #0d0d0d;
+      border-radius: 0;
+      min-height: calc(100vh - 80px);
+    }
+
+    h1 {
+      color: #00bfff;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <div class="dropdown">
+        <a href="features.html">Informasi ▼</a>
+        <div class="dropdown-content">
+          <a href="pengumuman.html">Pengumuman</a>
+          <a href="berita.html">Berita Sekolah</a>
+          <a href="agenda.html">Agenda Kegiatan</a>
+        </div>
+      </div>
+      <a href="smkn.html">Galeri</a>
+      <a href="community.html">Kontak</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Profil Sekolah</h1>
+    <p>SMK Negeri 5 Gowa merupakan salah satu sekolah menengah kejuruan yang memiliki berbagai program keahlian unggulan. Sekolah ini berkomitmen mencetak lulusan yang siap bersaing di dunia industri maupun melanjutkan ke pendidikan tinggi.</p>
+    <p>Terletak di Jl. Poros Malino, Kabupaten Gowa, Sulawesi Selatan, SMKN 5 Gowa menyediakan lingkungan belajar yang kondusif dengan dukungan tenaga pendidik profesional, sarana praktik memadai, serta kurikulum berbasis industri.</p>
+    <p>Program keahlian di antaranya meliputi Teknik Komputer dan Jaringan, Desain Komunikasi Visual, Teknik Kendaraan Ringan, Kelistrikan, dan Teknik dan Bisnis Sepeda Motor. Siswa juga dibina melalui kegiatan ekstrakurikuler serta bimbingan karakter untuk membentuk lulusan yang kompeten dan beretika.</p>
+  </div>
+
+ <script>
+  const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
+  let currentPage = location.pathname.split("/").pop();
+  let currentIndex = pages.indexOf(currentPage);
+
+  window.addEventListener("scroll", () => {
+    const scrollPos = window.scrollY + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    if (scrollPos >= docHeight - 5) {
+      if (currentIndex >= 0 && currentIndex < pages.length - 1) {
+        window.location.href = pages[currentIndex + 1];
+      }
+    }
+  });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Halaman Sekolah</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #00bfff;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #0d0d0d;
+      border: 1px solid #00bfff;
+      padding: 0.5rem 0;
+      z-index: 1001;
+      min-width: 180px;
+      top: 100%;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #111;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 140px 2rem 2rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      color: #00bfff;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    .jurusan img {
+      width: 100px;
+      margin: 10px 10px 0 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <div class="dropdown">
+        <a href="features.html">Informasi ▼</a>
+        <div class="dropdown-content">
+          <a href="pengumuman.html">Pengumuman</a>
+          <a href="berita.html">Berita Sekolah</a>
+          <a href="agenda.html">Agenda Kegiatan</a>
+        </div>
+      </div>
+      <a href="smkn.html">Galeri</a>
+      <a href="community.html">Kontak</a>
+    </div>
+  </div>
+
+  <main>
+    <section>
+      <h2>Deskripsi</h2>
+      <p>SMKN 5 Gowa adalah salah satu Sekolah Menengah Kejuruan unggulan di Sulawesi Selatan yang menyediakan berbagai program keahlian seperti Teknik Komputer dan Jaringan, Desain Komunikasi Visual, Teknik Kendaraan Ringan, Kelistrikan, dan Teknik Sepeda Motor. Dengan fasilitas lengkap dan pengajar profesional, sekolah ini berkomitmen untuk mencetak lulusan yang siap kerja, berkompeten, dan memiliki karakter yang baik.</p>
+      <p>Sekolah ini juga aktif dalam berbagai kegiatan ekstrakurikuler, pelatihan industri, dan kompetisi kejuruan, yang mendukung pengembangan bakat dan potensi siswa secara menyeluruh. SMKN 5 Gowa terus berinovasi dalam memberikan pengalaman belajar terbaik melalui pendekatan berbasis teknologi dan kemitraan dengan dunia industri.</p>
+    </section>
+
+    <section>
+      <h2>Visi & Misi</h2>
+      <p><strong>Visi:</strong> Menjadi SMK unggul yang menghasilkan tenaga kerja profesional dan berkarakter.</p>
+      <p><strong>Misi:</strong></p>
+      <ul>
+        <li>Menyelenggarakan pendidikan kejuruan yang berkualitas.</li>
+        <li>Mengembangkan keterampilan berbasis industri.</li>
+        <li>Mendorong pembentukan karakter dan etika kerja.</li>
+        <li>Menjalin kemitraan dengan dunia usaha dan industri.</li>
+        <li>Meningkatkan kompetensi guru dan tenaga kependidikan.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Program Keahlian</h2>
+      <ul>
+        <li>Teknik Komputer dan Jaringan (TKJ)</li>
+        <li>Desain Komunikasi Visual (DKV)</li>
+        <li>Teknik Kendaraan Ringan (TKR)</li>
+        <li>Kelistrikan</li>
+        <li>Teknik dan Bisnis Sepeda Motor (TSM)</li>
+      </ul>
+      <div class="jurusan">
+        <p><strong>TKJ:</strong> Jurusan yang mempelajari jaringan komputer, perangkat keras, dan troubleshooting jaringan.</p>
+        <p><strong>DKV:</strong> Jurusan yang fokus pada desain grafis, komunikasi visual, dan media kreatif.</p>
+        <p><strong>TKR:</strong> Jurusan yang mempelajari perawatan dan perbaikan kendaraan ringan seperti mobil.</p>
+        <p><strong>Kelistrikan:</strong> Jurusan yang membahas sistem kelistrikan rumah tangga dan industri.</p>
+        <p><strong>TSM:</strong> Jurusan yang mengajarkan perawatan dan perbaikan sepeda motor secara teknis dan bisnis.</p>
+        <img src="jurusan/tkj.jpg" alt="Teknik Komputer dan Jaringan">
+        <img src="jurusan/dkv.jpg" alt="Desain Komunikasi Visual">
+        <img src="jurusan/tkr.jpg" alt="Teknik Kendaraan Ringan">
+        <img src="jurusan/kelistrikan.jpg" alt="Kelistrikan">
+        <img src="jurusan/tsm.jpg" alt="Teknik dan Bisnis Sepeda Motor">
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
+  let currentPage = location.pathname.split("/").pop();
+  let currentIndex = pages.indexOf(currentPage);
+
+  window.addEventListener("scroll", () => {
+    const scrollPos = window.scrollY + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    if (scrollPos >= docHeight - 5) {
+      if (currentIndex >= 0 && currentIndex < pages.length - 1) {
+        window.location.href = pages[currentIndex + 1];
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
