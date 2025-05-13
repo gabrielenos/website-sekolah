@@ -6,11 +6,12 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url('bgsmk.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .navbar {
@@ -37,10 +38,12 @@
       text-decoration: none;
       font-weight: bold;
       white-space: nowrap;
+      transition: color 0.3s ease;
     }
 
     .navbar a:hover {
       text-decoration: underline;
+      color: #66d9ff;
     }
 
     .dropdown {
@@ -56,6 +59,8 @@
       z-index: 1001;
       min-width: 180px;
       top: 100%;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .dropdown-content a {
@@ -76,22 +81,158 @@
 
     .content {
       padding: 120px 2rem 2rem 2rem;
-      width: 100%;
-      background-color: #0d0d0d;
-      border-radius: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(13, 13, 13, 0.9);
+      border-radius: 8px;
       min-height: calc(100vh - 80px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile-header {
+      background: linear-gradient(to right, rgba(0, 100, 170, 0.7), rgba(0, 70, 120, 0.7));
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .profile-section {
+      background: rgba(20, 20, 20, 0.8);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #00bfff;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .program-card {
+      background: rgba(0, 191, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 191, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .program-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 191, 255, 0.2);
+    }
+
+    .facilities-section {
+      background: rgba(20, 20, 20, 0.8);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #00bfff;
+    }
+
+    .facilities-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .facility-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.7rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      font-size: 0.9rem;
     }
 
     h1 {
       color: #00bfff;
       text-align: center;
       margin-bottom: 1.5rem;
+      font-size: 2.2rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      color: #66d9ff;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: #99e6ff;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
     }
 
     p {
       line-height: 1.8;
       text-align: justify;
       margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-item {
+      flex: 1;
+      min-width: 250px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 191, 255, 0.2);
+    }
+
+    .contact-item h3 {
+      margin-top: 0;
+      color: #00bfff;
+    }
+
+    /* Indikator scroll */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 191, 255, 0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-indicator.show {
+      opacity: 1;
+    }
+
+    /* Efek transisi halaman */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #00bfff;
+      z-index: 2000;
+      transform: translateY(100%);
+      transition: transform 0.5s ease;
+    }
+
+    .page-transition.active {
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -109,34 +250,179 @@
         </div>
       </div>
       <a href="smkn.html">Galeri</a>
-      <a href="community.html">Kontak</a>
+      <a href="community.html">Sosial Media</a>
     </div>
   </div>
 
   <div class="content">
-    <h1>Profil Sekolah</h1>
-    <p>SMK Negeri 5 Gowa merupakan salah satu sekolah menengah kejuruan yang memiliki berbagai program keahlian unggulan. Sekolah ini berkomitmen mencetak lulusan yang siap bersaing di dunia industri maupun melanjutkan ke pendidikan tinggi.</p>
-    <p>Terletak di Jl. Poros Malino, Kabupaten Gowa, Sulawesi Selatan, SMKN 5 Gowa menyediakan lingkungan belajar yang kondusif dengan dukungan tenaga pendidik profesional, sarana praktik memadai, serta kurikulum berbasis industri.</p>
-    <p>Program keahlian di antaranya meliputi Teknik Komputer dan Jaringan, Desain Komunikasi Visual, Teknik Kendaraan Ringan, Kelistrikan, dan Teknik dan Bisnis Sepeda Motor. Siswa juga dibina melalui kegiatan ekstrakurikuler serta bimbingan karakter untuk membentuk lulusan yang kompeten dan beretika.</p>
+    <div class="profile-header">
+      <h1>Profil Sekolah</h1>
+      <p>SMK Negeri 5 Gowa merupakan salah satu sekolah menengah kejuruan yang memiliki berbagai program keahlian unggulan. Sekolah ini berkomitmen mencetak lulusan yang siap bersaing di dunia industri maupun melanjutkan ke pendidikan tinggi.</p>
+    </div>
+    
+    <div class="profile-section">
+      <h2>Sejarah dan Lokasi</h2>
+      <p>Terletak di Jl. Poros Malino, Kabupaten Gowa, Sulawesi Selatan, SMKN 5 Gowa menyediakan lingkungan belajar yang kondusif dengan dukungan tenaga pendidik profesional, sarana praktik memadai, serta kurikulum berbasis industri.</p>
+      <p>Didirikan pada tahun 2010, SMK Negeri 5 Gowa terus berkembang menjadi salah satu lembaga pendidikan kejuruan terkemuka di Sulawesi Selatan. Sekolah ini dibangun di atas lahan seluas 2 hektar dengan berbagai fasilitas modern yang mendukung proses pembelajaran.</p>
+    </div>
+    
+    <div class="profile-section">
+      <h2>Program Keahlian</h2>
+      <p>SMK Negeri 5 Gowa menawarkan beberapa program keahlian unggulan yang dirancang untuk memenuhi kebutuhan industri dan pasar kerja saat ini:</p>
+      
+      <div class="programs-grid">
+        <div class="program-card">
+          <h3>Teknik Komputer dan Jaringan</h3>
+          <p>Program keahlian yang membekali siswa dengan keterampilan dalam bidang instalasi jaringan, pemrograman, troubleshooting hardware dan software, serta administrasi server.</p>
+        </div>
+        
+        <div class="program-card">
+          <h3>Desain Komunikasi Visual</h3>
+          <p>Mengembangkan keterampilan siswa dalam bidang desain grafis, fotografi, ilustrasi, videografi, dan periklanan untuk berbagai media digital dan cetak.</p>
+        </div>
+        
+        <div class="program-card">
+          <h3>Teknik Kendaraan Ringan</h3>
+          <p>Membekali siswa dengan pengetahuan dan keterampilan dalam perawatan, perbaikan, dan pemeliharaan kendaraan bermotor ringan sesuai standar industri otomotif.</p>
+        </div>
+        
+        <div class="program-card">
+          <h3>Kelistrikan</h3>
+          <p>Mempersiapkan siswa untuk menguasai keterampilan dalam bidang instalasi listrik, perawatan peralatan listrik, dan sistem kelistrikan industri.</p>
+        </div>
+        
+        <div class="program-card">
+          <h3>Teknik dan Bisnis Sepeda Motor</h3>
+          <p>Program yang fokus pada perawatan, perbaikan, dan manajemen bisnis sepeda motor, memberikan bekal keterampilan teknis dan kewirausahaan.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="facilities-section">
+      <h2>Fasilitas Sekolah</h2>
+      <p>SMK Negeri 5 Gowa dilengkapi dengan berbagai fasilitas modern untuk mendukung proses pembelajaran praktik dan teori:</p>
+      
+      <div class="facilities-flex">
+        <div class="facility-item">Laboratorium Komputer</div>
+        <div class="facility-item">Bengkel Otomotif</div>
+        <div class="facility-item">Studio Desain Grafis</div>
+        <div class="facility-item">Workshop Kelistrikan</div>
+        <div class="facility-item">Perpustakaan Digital</div>
+        <div class="facility-item">Ruang Praktik Bisnis</div>
+        <div class="facility-item">Lapangan Olahraga</div>
+        <div class="facility-item">Aula Serbaguna</div>
+        <div class="facility-item">Kantin Sehat</div>
+        <div class="facility-item">Musholla</div>
+      </div>
+    </div>
+    
+    <div class="profile-section">
+      <h2>Visi dan Misi</h2>
+      <h3>Visi</h3>
+      <p>Menjadi lembaga pendidikan kejuruan terdepan yang menghasilkan lulusan berkompetensi tinggi, berakhlak mulia, dan mampu bersaing di era global.</p>
+      
+      <h3>Misi</h3>
+      <ul>
+        <li>Menyelenggarakan pendidikan kejuruan yang berkualitas sesuai dengan kebutuhan dunia industri</li>
+        <li>Mengembangkan kurikulum berbasis industri dan kewirausahaan</li>
+        <li>Membangun karakter dan nilai-nilai religius pada setiap peserta didik</li>
+        <li>Menciptakan lingkungan belajar yang inovatif, kreatif, dan menyenangkan</li>
+        <li>Menjalin kerjasama dengan dunia usaha dan industri untuk meningkatkan relevansi pembelajaran</li>
+      </ul>
+    </div>
+    
+    <div class="profile-section">
+      <h2>Informasi Kontak</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3>Alamat</h3>
+          <p>Jl. Poros Malino, Kabupaten Gowa<br>Sulawesi Selatan, Indonesia</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Kontak</h3>
+          <p>Telp: (0411) 12345678<br>Email: info@smkn5gowa.sch.id</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Media Sosial</h3>
+          <p>Instagram: @smkn5gowa<br>Facebook: SMK Negeri 5 Gowa</p>
+        </div>
+      </div>
+    </div>
   </div>
 
- <script>
-  const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
-  let currentPage = location.pathname.split("/").pop();
-  let currentIndex = pages.indexOf(currentPage);
+  <div class="scroll-indicator" id="scrollIndicator"></div>
+  <div class="page-transition" id="pageTransition"></div>
 
-  window.addEventListener("scroll", () => {
-    const scrollPos = window.scrollY + window.innerHeight;
-    const docHeight = document.documentElement.scrollHeight;
-    if (scrollPos >= docHeight - 5) {
-      if (currentIndex >= 0 && currentIndex < pages.length - 1) {
-        window.location.href = pages[currentIndex + 1];
-      }
+  <script>
+    const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
+    let currentPage = location.pathname.split("/").pop() || "index.html";
+    let currentIndex = pages.indexOf(currentPage);
+    let isScrolling = false;
+    let lastScrollTop = 0;
+    const scrollIndicator = document.getElementById("scrollIndicator");
+    const pageTransition = document.getElementById("pageTransition");
+
+    // Mengatur waktu cooldown antara scroll
+    const scrollCooldown = 1000; // dalam milidetik
+
+    function showScrollIndicator(message) {
+      scrollIndicator.textContent = message;
+      scrollIndicator.classList.add("show");
+      setTimeout(() => {
+        scrollIndicator.classList.remove("show");
+      }, 2000);
     }
-  });
-</script>
 
+    function navigateWithTransition(url) {
+      pageTransition.classList.add("active");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500);
+    }
 
+    window.addEventListener("scroll", () => {
+      if (isScrolling) return;
 
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollPos = st + window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      
+      // Scroll ke bawah dan hampir mencapai akhir halaman
+      if (st > lastScrollTop && scrollPos >= docHeight - 5) {
+        if (currentIndex >= 0 && currentIndex < pages.length - 1) {
+          isScrolling = true;
+          showScrollIndicator("Navigasi ke halaman berikutnya...");
+          navigateWithTransition(pages[currentIndex + 1]);
+          
+          setTimeout(() => {
+            isScrolling = false;
+          }, scrollCooldown);
+        }
+      } 
+      // Scroll ke atas dan hampir mencapai awal halaman
+      else if (st < lastScrollTop && st <= 5) {
+        if (currentIndex > 0) {
+          isScrolling = true;
+          showScrollIndicator("Kembali ke halaman sebelumnya...");
+          navigateWithTransition(pages[currentIndex - 1]);
+          
+          setTimeout(() => {
+            isScrolling = false;
+          }, scrollCooldown);
+        }
+      }
+      
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, { passive: true });
+
+    // Mencegah perilaku scroll default di perangkat mobile dengan sensitivitas tinggi
+    document.addEventListener('touchmove', function(e) {
+      if (isScrolling) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
 </body>
 </html>

@@ -10,6 +10,15 @@
       background: url('bg.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
+      opacity: 0;
+      animation: bodyFadeIn 1s ease forwards;
+      scroll-behavior: smooth; /* Untuk efek scroll halus */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+    
+    @keyframes bodyFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .navbar {
@@ -79,11 +88,28 @@
       margin: auto;
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     section {
       margin-bottom: 2rem;
+      animation: slideIn 0.8s ease-out;
+      animation-fill-mode: both;
     }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    section:nth-child(1) { animation-delay: 0.2s; }
+    section:nth-child(2) { animation-delay: 0.4s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
 
     section h2 {
       color: #00bfff;
@@ -94,10 +120,107 @@
       padding-left: 1.2rem;
     }
 
-    .jurusan img {
-      width: 100px;
-      margin: 10px 10px 0 0;
+    .jurusan-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .jurusan-item {
+      flex: 1;
+      min-width: 250px;
+      border: 1px solid #00bfff;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .jurusan-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+    }
+
+    .jurusan-item h3 {
+      color: #00bfff;
+      margin-top: 0;
+    }
+
+    .jurusan-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
       border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    
+    .kegiatan-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+    
+    .kegiatan-gallery img {
+      width: calc(33.33% - 6px);
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .kegiatan-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
+    }
+    
+    /* Navigasi Indikator */
+    .nav-indicator {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+    
+    .nav-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00bfff;
+      color: #00bfff;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .nav-arrow:hover {
+      background-color: #00bfff;
+      color: black;
+      transform: scale(1.1);
+      animation: none;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 191, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
+    }
+
+    .jurusan-item ul {
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -115,7 +238,7 @@
         </div>
       </div>
       <a href="smkn.html">Galeri</a>
-      <a href="community.html">Kontak</a>
+      <a href="community.html">Sosial Media</a>
     </div>
   </div>
 
@@ -127,38 +250,97 @@
     </section>
 
     <section>
-      <h2>Visi & Misi</h2>
-      <p><strong>Visi:</strong> Menjadi SMK unggul yang menghasilkan tenaga kerja profesional dan berkarakter.</p>
-      <p><strong>Misi:</strong></p>
-      <ul>
-        <li>Menyelenggarakan pendidikan kejuruan yang berkualitas.</li>
-        <li>Mengembangkan keterampilan berbasis industri.</li>
-        <li>Mendorong pembentukan karakter dan etika kerja.</li>
-        <li>Menjalin kemitraan dengan dunia usaha dan industri.</li>
-        <li>Meningkatkan kompetensi guru dan tenaga kependidikan.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Program Keahlian</h2>
-      <ul>
-        <li>Teknik Komputer dan Jaringan (TKJ)</li>
-        <li>Desain Komunikasi Visual (DKV)</li>
-        <li>Teknik Kendaraan Ringan (TKR)</li>
-        <li>Kelistrikan</li>
-        <li>Teknik dan Bisnis Sepeda Motor (TSM)</li>
-      </ul>
-      <div class="jurusan">
-        <p><strong>TKJ:</strong> Jurusan yang mempelajari jaringan komputer, perangkat keras, dan troubleshooting jaringan.</p>
-        <p><strong>DKV:</strong> Jurusan yang fokus pada desain grafis, komunikasi visual, dan media kreatif.</p>
-        <p><strong>TKR:</strong> Jurusan yang mempelajari perawatan dan perbaikan kendaraan ringan seperti mobil.</p>
-        <p><strong>Kelistrikan:</strong> Jurusan yang membahas sistem kelistrikan rumah tangga dan industri.</p>
-        <p><strong>TSM:</strong> Jurusan yang mengajarkan perawatan dan perbaikan sepeda motor secara teknis dan bisnis.</p>
-        <img src="jurusan/tkj.jpg" alt="Teknik Komputer dan Jaringan">
-        <img src="jurusan/dkv.jpg" alt="Desain Komunikasi Visual">
-        <img src="jurusan/tkr.jpg" alt="Teknik Kendaraan Ringan">
-        <img src="jurusan/kelistrikan.jpg" alt="Kelistrikan">
-        <img src="jurusan/tsm.jpg" alt="Teknik dan Bisnis Sepeda Motor">
+      <h2>Program Keahlian dan Kegiatan</h2>
+      <div class="jurusan-container">
+        <div class="jurusan-item">
+          <h3>Teknik Komputer dan Jaringan (TKJ)</h3>
+          <img src="jurusan/tkj.jpg" alt="Teknik Komputer dan Jaringan">
+          <p>Kegiatan Jurusan:</p>
+          <ul>
+            <li>Praktikum jaringan komputer dan server</li>
+            <li>Workshop instalasi sistem operasi</li>
+            <li>Pelatihan sertifikasi Cisco dan Microsoft</li>
+            <li>Magang di perusahaan IT</li>
+            <li>Kompetisi jaringan dan keamanan komputer</li>
+          </ul>
+          <div class="kegiatan-gallery">
+            <img src="kegiatan/tkj-praktikum.jpg" alt="Praktikum Jaringan">
+            <img src="kegiatan/tkj-workshop.jpg" alt="Workshop Instalasi">
+            <img src="kegiatan/tkj-kompetisi.jpg" alt="Kompetisi Jaringan">
+          </div>
+        </div>
+        
+        <div class="jurusan-item">
+          <h3>Desain Komunikasi Visual (DKV)</h3>
+          <img src="jurusan/dkv.jpg" alt="Desain Komunikasi Visual">
+          <p>Kegiatan Jurusan:</p>
+          <ul>
+            <li>Praktikum desain grafis dengan Adobe Creative Suite</li>
+            <li>Workshop fotografi dan videografi</li>
+            <li>Kunjungan studio desain profesional</li>
+            <li>Pameran karya siswa tahunan</li>
+            <li>Proyek kolaborasi dengan industri kreatif</li>
+          </ul>
+          <div class="kegiatan-gallery">
+            <img src="kegiatan/dkv-praktikum.jpg" alt="Praktikum Desain">
+            <img src="kegiatan/dkv-pameran.jpg" alt="Pameran Karya">
+            <img src="kegiatan/dkv-workshop.jpg" alt="Workshop Fotografi">
+          </div>
+        </div>
+        
+        <div class="jurusan-item">
+          <h3>Teknik Kendaraan Ringan (TKR)</h3>
+          <img src="jurusan/tkr.jpg" alt="Teknik Kendaraan Ringan">
+          <p>Kegiatan Jurusan:</p>
+          <ul>
+            <li>Praktikum mesin dan kelistrikan mobil</li>
+            <li>Workshop tune-up dan perawatan berkala</li>
+            <li>Pelatihan sistem injeksi bahan bakar</li>
+            <li>Studi lapangan ke bengkel resmi</li>
+            <li>Kompetisi keterampilan otomotif antar-sekolah</li>
+          </ul>
+          <div class="kegiatan-gallery">
+            <img src="kegiatan/tkr-praktikum.jpg" alt="Praktikum Mesin">
+            <img src="kegiatan/tkr-workshop.jpg" alt="Workshop Tune-up">
+            <img src="kegiatan/tkr-kompetisi.jpg" alt="Kompetisi Otomotif">
+          </div>
+        </div>
+        
+        <div class="jurusan-item">
+          <h3>Kelistrikan</h3>
+          <img src="jurusan/kelistrikan.jpg" alt="Kelistrikan">
+          <p>Kegiatan Jurusan:</p>
+          <ul>
+            <li>Praktikum instalasi listrik rumah dan industri</li>
+            <li>Workshop panel listrik dan kontrol motor</li>
+            <li>Pelatihan sertifikasi kelistrikan</li>
+            <li>Kunjungan ke pembangkit listrik</li>
+            <li>Proyek sistem otomasi rumah pintar</li>
+          </ul>
+          <div class="kegiatan-gallery">
+            <img src="kegiatan/listrik-praktikum.jpg" alt="Praktikum Instalasi">
+            <img src="kegiatan/listrik-panel.jpg" alt="Workshop Panel">
+            <img src="kegiatan/listrik-kunjungan.jpg" alt="Kunjungan Pembangkit">
+          </div>
+        </div>
+        
+        <div class="jurusan-item">
+          <h3>Teknik dan Bisnis Sepeda Motor (TSM)</h3>
+          <img src="jurusan/tsm.jpg" alt="Teknik dan Bisnis Sepeda Motor">
+          <p>Kegiatan Jurusan:</p>
+          <ul>
+            <li>Praktikum mesin sepeda motor konvensional dan injeksi</li>
+            <li>Workshop diagnosis kerusakan sepeda motor</li>
+            <li>Pelatihan manajemen bengkel</li>
+            <li>Kunjungan industri ke pabrik sepeda motor</li>
+            <li>Kompetisi service sepeda motor</li>
+          </ul>
+          <div class="kegiatan-gallery">
+            <img src="kegiatan/tsm-praktikum.jpg" alt="Praktikum Mesin">
+            <img src="kegiatan/tsm-workshop.jpg" alt="Workshop Diagnosis">
+            <img src="kegiatan/tsm-kompetisi.jpg" alt="Kompetisi Service">
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -167,16 +349,102 @@
   const pages = ["index.html", "profil.html", "features.html", "smkn.html", "community.html"];
   let currentPage = location.pathname.split("/").pop();
   let currentIndex = pages.indexOf(currentPage);
+  let isNavigating = false;
+  let lastScrollPosition = window.scrollY;
+  
+  // Fungsi untuk navigasi
+  function navigateTo(pageIndex) {
+    if (isNavigating) return;
+    if (pageIndex >= 0 && pageIndex < pages.length) {
+      isNavigating = true;
+      document.body.style.opacity = 0;
+      document.body.style.transition = "opacity 0.5s ease";
+      setTimeout(() => {
+        window.location.href = pages[pageIndex];
+      }, 500);
+    }
+  }
 
+  // Event listener untuk deteksi scroll
   window.addEventListener("scroll", () => {
     const scrollPos = window.scrollY + window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
-    if (scrollPos >= docHeight - 5) {
-      if (currentIndex >= 0 && currentIndex < pages.length - 1) {
-        window.location.href = pages[currentIndex + 1];
-      }
+    const currentScrollPosition = window.scrollY;
+    
+    // Deteksi arah scroll
+    const isScrollingDown = currentScrollPosition > lastScrollPosition;
+    const isScrollingUp = currentScrollPosition < lastScrollPosition;
+    
+    // Cek apakah pengguna telah mencapai batas bawah
+    if (scrollPos >= docHeight - 5 && isScrollingDown) {
+      navigateTo(currentIndex + 1);
     }
+    
+    // Cek apakah pengguna telah mencapai batas atas
+    if (currentScrollPosition <= 5 && isScrollingUp) {
+      navigateTo(currentIndex - 1);
+    }
+    
+    lastScrollPosition = currentScrollPosition;
   });
+  
+  // Animasi saat halaman dimuat
+  document.addEventListener("DOMContentLoaded", () => {
+    // Animasi untuk jurusan items
+    const jurusanItems = document.querySelectorAll('.jurusan-item');
+    
+    // Observer untuk animasi scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    // Observe semua elemen jurusan
+    jurusanItems.forEach(item => {
+      item.style.opacity = 0;
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(item);
+    });
+    
+    // Set last scroll position setelah halaman dimuat
+    lastScrollPosition = window.scrollY;
+  });
+  
+  // Tambahkan indikator navigasi
+  function createNavigationIndicator() {
+    const navIndicator = document.createElement('div');
+    navIndicator.className = 'nav-indicator';
+    
+    const prevArrow = document.createElement('div');
+    prevArrow.className = 'nav-arrow nav-prev';
+    prevArrow.innerHTML = '▲';
+    prevArrow.title = 'Halaman Sebelumnya';
+    prevArrow.onclick = () => navigateTo(currentIndex - 1);
+    
+    const nextArrow = document.createElement('div');
+    nextArrow.className = 'nav-arrow nav-next';
+    nextArrow.innerHTML = '▼';
+    nextArrow.title = 'Halaman Berikutnya';
+    nextArrow.onclick = () => navigateTo(currentIndex + 1);
+    
+    if (currentIndex > 0) {
+      navIndicator.appendChild(prevArrow);
+    }
+    
+    if (currentIndex < pages.length - 1) {
+      navIndicator.appendChild(nextArrow);
+    }
+    
+    document.body.appendChild(navIndicator);
+  }
+  
+  // Panggil fungsi untuk membuat indikator navigasi
+  window.addEventListener('load', createNavigationIndicator);
 </script>
 
 </body>

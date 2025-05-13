@@ -2,75 +2,418 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kontak SMKN 5 Gowa</title>
+  <title>Sosial Media SMKN5 Gowa</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', Arial, sans-serif;
       background-color: #0d0d0d;
       color: white;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      background-image: linear-gradient(to bottom, #0d0d0d, #16213e);
+      min-height: 100vh;
     }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      background-color: #0d0d0d;
-      padding: 1rem 2rem;
-      border-bottom: 2px solid #00bfff;
-      z-index: 1000;
-    }
-
-    .navbar a {
-      color: #00bfff;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .navbar a:hover {
-      text-decoration: underline;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
     .container {
-      padding: 140px 2rem 2rem 2rem;
+      padding: 3rem 2rem;
       max-width: 900px;
       margin: auto;
     }
 
-    h1, h2 {
+    h1 {
       color: #00bfff;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #00bfff, transparent);
+    }
+
+    h2 {
+      color: #00bfff;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
     }
 
     section {
       margin-top: 2rem;
-      background-color: #1a1a1a;
-      padding: 1.5rem;
+      background-color: rgba(26, 26, 26, 0.8);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 191, 255, 0.1);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    }
+    
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.02);
+    }
+    
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .instagram-icon {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white;
+    }
+    
+    .youtube-icon {
+      background: #FF0000;
+      color: white;
+    }
+    
+    .social-info {
+      flex: 1;
+    }
+    
+    .social-info p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    
+    .social-info a {
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .instagram-link {
+      color: #E1306C;
+    }
+    
+    .instagram-link:hover {
+      color: #fbad50;
+    }
+    
+    .youtube-link {
+      color: #FF0000;
+    }
+    
+    .youtube-link:hover {
+      color: #ff6666;
+    }
+    
+    .page-header {
+      position: relative;
+      text-align: center;
+      padding: 3rem 0 1rem;
+    }
+    
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 191, 255, 0.1);
+      border-radius: 50%;
+      padding: 15px;
+      border: 2px solid rgba(0, 191, 255, 0.3);
+    }
+    
+    .logo img {
+      max-width: 100%;
+      border-radius: 50%;
+    }
+    
+    .follow-text {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 2rem 0 1rem;
+      color: #cccccc;
+      font-weight: 300;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 191, 255, 0.8);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 1500;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+    
+    .scroll-indicator::before {
+      content: "↑";
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 16px;
+      animation: bounce 1s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-5px);
+      }
+    }
+    
+    .scroll-indicator.visible {
+      opacity: 1;
+      top: 30px;
+    }
+    
+    /* Page transition animation */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #0d0d0d, #121e3d);
+      z-index: 2000;
+      transform: translateY(100%);
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .page-transition.active {
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <a href="index.html">Beranda</a>
-    <a href="profil.html">Profil</a>
-    <a href="features.html">Informasi</a>
-    <a href="smkn.html">Galeri</a>
-    <a href="community.html">Kontak</a>
-  </div>
-
   <div class="container">
-    <h1>Kontak SMKN 5 Gowa</h1>
+    <div class="page-header">
+      <div class="logo">
+        <div style="width: 100%; height: 100%; background: #00bfff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2rem;">SMK5</div>
+      </div>
+      <h1>Sosial Media SMKN 5 Gowa</h1>
+    </div>
 
     <section>
-      <h2>Kontak SMKN 5 Gowa</h2>
-      <p><strong>Alamat:</strong> Jl. Poros Malino, Kabupaten Gowa, Sulawesi Selatan</p>
-      <p><strong>Email:</strong> smkn5gowa@example.sch.id</p>
-      <p><strong>Telepon:</strong> (0411) 123456</p>
+      <h2>Ikuti Kami</h2>
+      <p class="follow-text">Terhubung dengan SMKN 5 Gowa melalui platform sosial media kami</p>
+      
+      <div class="social-links">
+        <div class="social-item">
+          <div class="social-icon instagram-icon">
+            <span>IG</span>
+          </div>
+          <div class="social-info">
+            <p>Instagram Resmi</p>
+            <a href="https://www.instagram.com/smkn5_gowa" class="instagram-link">@smkn5_gowa</a>
+          </div>
+        </div>
+        
+        <div class="social-item">
+          <div class="social-icon youtube-icon">
+            <span>YT</span>
+          </div>
+          <div class="social-info">
+            <p>Kanal YouTube</p>
+            <a href="https://www.youtube.com/c/smkn5gowa" class="youtube-link">SMKN5 Gowa</a>
+          </div>
+        </div>
+      </div>
     </section>
+    
+    <div class="footer">
+      &copy; 2025 SMKN 5 Gowa - Semua Hak Dilindungi
+    </div>
   </div>
+  
+  <!-- Add scroll indicator -->
+  <div class="scroll-indicator">Scroll ke atas untuk Galeri</div>
+  
+  <!-- Add page transition element -->
+  <div class="page-transition"></div>
+  
+  <script>
+    // Variables to track scroll behavior
+    let lastScrollTop = 0;
+    let isScrollingUp = false;
+    let isNavigating = false;
+    let scrollIndicator = document.querySelector('.scroll-indicator');
+    let pageTransition = document.querySelector('.page-transition');
+    let scrollTimer = null;
+    
+    // Previous page is smkn.html (Galeri)
+    const previousPage = 'smkn.html';
+    
+    // Use wheel event for more precise detection
+    window.addEventListener('wheel', function(e) {
+      // Negative deltaY means scrolling up
+      if (e.deltaY < 0) {
+        // Check if we're at the top of the page
+        if (window.scrollY <= 10) {
+          isScrollingUp = true;
+          scrollIndicator.classList.add('visible');
+          
+          // Clear previous timer if exists
+          if (scrollTimer) clearTimeout(scrollTimer);
+          
+          // Set a timer to navigate if user continues scrolling up
+          scrollTimer = setTimeout(function() {
+            if (isScrollingUp && !isNavigating) {
+              navigateToPreviousPage();
+            }
+          }, 300);
+        }
+      } else {
+        // Scrolling down
+        isScrollingUp = false;
+        scrollIndicator.classList.remove('visible');
+        if (scrollTimer) clearTimeout(scrollTimer);
+      }
+    }, { passive: true });
+    
+    // Also track regular scroll for fallback
+    window.addEventListener('scroll', function() {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // If at top and was scrolling down before, reset
+      if (st <= 10 && lastScrollTop > st) {
+        scrollIndicator.classList.add('visible');
+      } else {
+        scrollIndicator.classList.remove('visible');
+      }
+      
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, { passive: true });
+    
+    // Function to navigate to previous page with animation
+    function navigateToPreviousPage() {
+      if (isNavigating) return;
+      
+      isNavigating = true;
+      console.log("Navigating to previous page...");
+      
+      // Animate transition
+      pageTransition.classList.add('active');
+      
+      // After animation completes, navigate to the previous page
+      setTimeout(function() {
+        window.location.href = previousPage;
+      }, 500);
+    }
+    
+    // Add keyboard navigation (up arrow)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowUp' && window.scrollY <= 10 && !isNavigating) {
+        scrollIndicator.classList.add('visible');
+        setTimeout(function() {
+          navigateToPreviousPage();
+        }, 200);
+      }
+    });
+    
+    // Add pull-to-navigate feature for mobile devices with improved sensitivity
+    let touchStartY = 0;
+    let touchMoveY = 0;
+    const minSwipeDistance = 80;
+    
+    document.addEventListener('touchstart', function(e) {
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+      // Only check if we're at the top of the page
+      if (window.scrollY <= 10) {
+        touchMoveY = e.changedTouches[0].screenY;
+        
+        // If pulling down far enough, show indicator
+        if (touchMoveY - touchStartY > minSwipeDistance / 2) {
+          scrollIndicator.classList.add('visible');
+        }
+      }
+    }, { passive: true });
+    
+    document.addEventListener('touchend', function(e) {
+      // Only process if at top of page
+      if (window.scrollY <= 10) {
+        let touchEndY = e.changedTouches[0].screenY;
+        let swipeDistance = touchEndY - touchStartY;
+        
+        // If swipe down is long enough, navigate to previous page
+        if (swipeDistance > minSwipeDistance && !isNavigating) {
+          navigateToPreviousPage();
+        } else {
+          scrollIndicator.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+    
+    // When page loads, initialize
+    window.addEventListener('load', function() {
+      // If we're already at the top, prepare for scroll-up navigation
+      if (window.scrollY <= 10) {
+        console.log("Page loaded at top, ready for navigation");
+      }
+    });
+  </script>
 </body>
 </html>

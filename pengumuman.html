@@ -2,32 +2,47 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Pengumuman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengumuman - SMKN 5 Gowa</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #0d0d0d;
       color: white;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+
+    body.loaded {
+      opacity: 1;
     }
 
     .navbar {
       position: fixed;
       top: 0;
-      right: 0;
       width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.85);
-      padding: 1rem 2rem;
+      padding: 0.8rem 2rem;
       border-bottom: 2px solid #00bfff;
       z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      color: #00bfff;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
     }
 
     .nav-links {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
 
     .navbar a {
@@ -35,31 +50,85 @@
       text-decoration: none;
       font-weight: bold;
       white-space: nowrap;
+      transition: all 0.3s;
+      padding: 5px 10px;
+      border-radius: 4px;
     }
 
     .navbar a:hover {
-      text-decoration: underline;
+      background-color: rgba(0, 191, 255, 0.1);
     }
 
     .content {
-      padding: 140px 2rem 2rem 2rem;
+      padding: 120px 2rem 2rem;
       max-width: 900px;
       margin: auto;
       text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
+      margin-top: 20px;
+    }
+
+    .announcement-container {
+      margin: 0 auto;
+      width: 80%;
+      max-width: 500px;
     }
 
     .content img {
       width: 100%;
-      max-width: 600px;
+      max-width: 400px; /* Ukuran gambar yang lebih kecil */
       border-radius: 10px;
       margin-bottom: 1rem;
+      border: 2px solid rgba(0, 191, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s;
+    }
+
+    .content img:hover {
+      transform: scale(1.02);
     }
 
     .caption {
       font-size: 1.2rem;
       color: #00bfff;
+      margin-top: 20px;
+      font-weight: bold;
     }
-      .dropdown {
+
+    .details {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .details h3 {
+      color: #00bfff;
+      margin-top: 0;
+    }
+
+    .details ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+
+    .details li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .details li:before {
+      content: "•";
+      color: #00bfff;
+      position: absolute;
+      left: 0;
+    }
+
+    .dropdown {
       position: relative;
     }
 
@@ -68,10 +137,12 @@
       position: absolute;
       background-color: #0d0d0d;
       border: 1px solid #00bfff;
+      border-radius: 4px;
       padding: 0.5rem 0;
       z-index: 1001;
       min-width: 180px;
       top: 100%;
+      overflow: hidden;
     }
 
     .dropdown-content a {
@@ -90,14 +161,109 @@
       display: block;
     }
 
-</style>
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #00bfff;
+      margin: 3px 0;
+      transition: 0.4s;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(0, 191, 255, 0.2);
+      font-size: 12px;
+      color: #666;
+    }
+
+    @media screen and (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(13, 13, 13, 0.95);
+        padding: 0;
+        border-top: 1px solid #00bfff;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      .nav-links.active {
+        max-height: 300px;
+      }
+
+      .nav-links a, .dropdown {
+        width: 100%;
+        padding: 12px 16px;
+        box-sizing: border-box;
+        text-align: center;
+        margin: 0;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        border: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        max-height: 200px;
+      }
+
+      .content {
+        padding: 100px 1rem 1rem;
+      }
+
+      .announcement-container {
+        width: 100%;
+      }
+
+      .content img {
+        max-width: 300px;
+      }
+    }
+
+    /* Animation for page loading */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+  </style>
 </head>
 <body>
   <div class="navbar">
-    <div class="nav-links">
+    <a href="index.html" class="logo">SMKN 5 Gowa</a>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
       <a href="index.html">Beranda</a>
       <a href="profil.html">Profil</a>
-      <div class="dropdown">
+      <div class="dropdown" id="infoDropdown">
         <a href="features.html">Informasi ▼</a>
         <div class="dropdown-content">
           <a href="pengumuman.html">Pengumuman</a>
@@ -106,13 +272,74 @@
         </div>
       </div>
       <a href="smkn.html">Galeri</a>
-      <a href="community.html">Jadwal</a>
+      <a href="community.html">Sosial Media</a>
     </div>
   </div>
 
-  <div class="content">
-    <img src="spmb.jpg" alt="Pengumuman Pendaftaran">
-    <p class="caption">Telah terbuka pendaftaran SMKN 5 Gowa</p>
+  <div class="content fade-in">
+    <h1>Pengumuman</h1>
+    <div class="announcement-container">
+      <img src="spmb.jpg" alt="Pengumuman Pendaftaran">
+      <p class="caption">Telah Dibuka Pendaftaran Siswa Baru SMKN 5 Gowa</p>
+      
+      <div class="details">
+        <h3>Informasi Pendaftaran:</h3>
+        <ul>
+          <li>Periode Pendaftaran: 1 Juni - 30 Juli 2025</li>
+          <li>Pengumuman Hasil: 10 Agustus 2025</li>
+          <li>Daftar Ulang: 15-20 Agustus 2025</li>
+          <li>Kontak: 0812-3456-7890 (Panitia PPDB)</li>
+        </ul>
+      </div>
+    </div>
   </div>
+
+  <footer>
+    <p>© 2025 SMKN 5 Gowa. Hak Cipta Dilindungi.</p>
+  </footer>
+
+  <script>
+    // Page loading animation
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.body.classList.add("loaded");
+      }, 100);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+    const infoDropdown = document.getElementById("infoDropdown");
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    }
+
+    // Handle dropdown on mobile
+    if (window.innerWidth <= 768 && infoDropdown) {
+      infoDropdown.addEventListener("click", (e) => {
+        infoDropdown.classList.toggle("active");
+        e.stopPropagation();
+      });
+    }
+
+    // Smooth scroll between pages
+    const links = document.querySelectorAll('a[href^="index"], a[href^="profil"], a[href^="features"], a[href^="pengumuman"], a[href^="berita"], a[href^="agenda"], a[href^="smkn"], a[href^="community"]');
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        // Skip if already on this page
+        if (location.pathname.endsWith(href)) return;
+        
+        e.preventDefault();
+        document.body.style.opacity = 0;
+        setTimeout(() => {
+          window.location.href = href;
+        }, 600);
+      });
+    });
+  </script>
 </body>
 </html>

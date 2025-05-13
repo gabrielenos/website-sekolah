@@ -2,88 +2,590 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galeri SMKN 5 Gowa</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0d0d0d;
       color: white;
+      line-height: 1.6;
     }
 
     .navbar {
       position: fixed;
       top: 0;
-      right: 0;
       width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: center;
       background-color: rgba(0, 0, 0, 0.9);
-      padding: 1rem 2rem;
-      border-bottom: 2px solid #00bfff;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #00bfff;
       z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
     }
 
-    .navbar a {
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-button {
       color: #00bfff;
-      margin-left: 20px;
       text-decoration: none;
       font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid #00bfff;
+      transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      margin: 0 3px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .navbar a:hover {
-      text-decoration: underline;
+    .nav-button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.2), transparent);
+      transition: all 0.6s;
+    }
+
+    .nav-button:hover:before {
+      left: 100%;
+    }
+
+    .nav-button:hover, .nav-button.active {
+      background-color: #003b4d;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
+      text-shadow: 0 0 5px rgba(0, 191, 255, 0.7);
+    }
+
+    .nav-button.active {
+      background-color: #005c7a;
+      border-color: #80dfff;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-btn {
+      color: #00bfff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.9);
+      min-width: 200px;
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+      border-radius: 0 0 8px 8px;
+      z-index: 1;
+      margin-top: 10px;
+      border: 1px solid #00bfff;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      transition: all 0.3s ease;
+      position: relative;
+      left: -20px;
+      opacity: 0;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(0, 191, 255, 0.2);
+      padding-left: 25px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .dropdown:hover .dropdown-content a {
+      animation: slideIn 0.4s forwards;
+    }
+
+    .dropdown:hover .dropdown-content a:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .dropdown:hover .dropdown-content a:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dropdown:hover .dropdown-content a:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { left: -20px; opacity: 0; }
+      to { left: 0; opacity: 1; }
     }
 
     .container {
-      padding: 140px 2rem 2rem 2rem;
-      max-width: 1000px;
+      padding: 120px 2rem 4rem 2rem;
+      max-width: 1200px;
       margin: auto;
     }
 
-    h1 {
+    .header {
       text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 1s ease;
+    }
+
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
       color: #00bfff;
-      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+
+    h1:after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      bottom: -10px;
+      left: 25%;
+      background: linear-gradient(90deg, transparent, #00bfff, transparent);
+      animation: glowLine 2s infinite;
+    }
+
+    @keyframes glowLine {
+      0% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(0, 191, 255, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.5); }
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 1.5rem auto 0;
+      animation: fadeIn 1.5s ease;
     }
 
     .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 2rem;
+      perspective: 1000px;
     }
 
-    .gallery img {
-      width: 250px;
+    .gallery-item {
+      overflow: hidden;
       border-radius: 10px;
-      border: 2px solid #00bfff;
+      position: relative;
+      height: 250px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
     }
+
+    .gallery-item:hover {
+      transform: translateY(-10px) rotateY(5deg);
+      box-shadow: 0 15px 30px rgba(0, 191, 255, 0.3);
+      border-color: #00bfff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      color: white;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Styling untuk hint navigasi scroll */
+    .scroll-hint {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid #333;
+      color: #00bfff;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-hint:hover {
+      opacity: 1;
+      animation: hintGlow 2s infinite;
+    }
+
+    @keyframes hintGlow {
+      0% { text-shadow: 0 0 5px rgba(0, 191, 255, 0.1); }
+      50% { text-shadow: 0 0 15px rgba(0, 191, 255, 0.5); }
+      100% { text-shadow: 0 0 5px rgba(0, 191, 255, 0.1); }
+    }
+
+    .scroll-up, .scroll-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-up:hover, .scroll-down:hover {
+      transform: scale(1.1);
+    }
+
+    .arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 3px solid #00bfff;
+      border-top: 3px solid #00bfff;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-up:hover .arrow,
+    .scroll-down:hover .arrow {
+      border-color: #80dfff;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+    }
+
+    .arrow.up {
+      transform: rotate(-45deg);
+      animation: floatUp 2s infinite;
+    }
+
+    .arrow.down {
+      transform: rotate(135deg);
+      animation: floatDown 2s infinite;
+    }
+
+    @keyframes floatUp {
+      0%, 100% { transform: rotate(-45deg) translateY(0); }
+      50% { transform: rotate(-45deg) translateY(-5px); }
+    }
+
+    @keyframes floatDown {
+      0%, 100% { transform: rotate(135deg) translateY(0); }
+      50% { transform: rotate(135deg) translateY(5px); }
+    }
+
+    body {
+      transition: opacity 0.5s ease;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00bfff, transparent);
+      animation: footerGlow 3s infinite linear;
+    }
+
+    @keyframes footerGlow {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0.5rem;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-button {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.7rem;
+        margin: 3px;
+      }
+      
+      .container {
+        padding-top: 120px;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    /* Animation for gallery items */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gallery-item {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.7s; }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <a href="index.html">Beranda</a>
-    <a href="profil.html">Profil</a>
-    <a href="features.html">Informasi</a>
-    <a href="smkn.html">Galeri</a>
-    <a href="community.html">Kontak</a>
-  </div>
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-button">Beranda</a>
+      <a href="profil.html" class="nav-button">Profil</a>
+      <div class="dropdown">
+        <span class="dropdown-btn nav-button" onclick="window.location.href='features.html'">Informasi ▼</span>
+        <div class="dropdown-content">
+          <a href="informasi-pengumuman.html">Pengumuman</a>
+          <a href="informasi-berita.html">Berita Sekolah</a>
+          <a href="informasi-agenda.html">Agenda Kegiatan</a>
+        </div>
+      </div>
+      <a href="smkn.html" class="nav-button active">Galeri</a>
+      <a href="community.html" class="nav-button">Sosial Media</a>
+    </div>
+  </nav>
 
   <div class="container">
-    <h1>Galeri SMKN 5 Gowa</h1>
+    <div class="header">
+      <h1>Galeri SMKN 5 Gowa</h1>
+      <p class="subtitle">Kumpulan foto-foto kegiatan dan momen berharga di sekolah kami</p>
+    </div>
+
     <div class="gallery">
-      <img src="galeri/foto1.jpg" alt="Dokumentasi 1">
-      <img src="galeri/foto2.jpg" alt="Dokumentasi 2">
-      <img src="galeri/foto3.jpg" alt="Dokumentasi 3">
-      <img src="galeri/foto4.jpg" alt="Dokumentasi 4">
-      <img src="galeri/foto5.jpg" alt="Dokumentasi 5">
-      <img src="galeri/foto6.jpg" alt="Dokumentasi 6">
-      <img src="galeri/foto7.jpg" alt="Dokumentasi 7">
-      <img src="galeri/foto8.jpg" alt="Dokumentasi 8">
-      <img src="galeri/foto9.jpg" alt="Dokumentasi 9">
-      <img src="galeri/foto10.jpg" alt="Dokumentasi 10">
+      <div class="gallery-item">
+        <img src="galeri/foto1.jpg" alt="Dokumentasi 1">
+        <div class="gallery-caption">Kegiatan Pembelajaran Praktikum</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto2.jpg" alt="Dokumentasi 2">
+        <div class="gallery-caption">Upacara Bendera</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto3.jpg" alt="Dokumentasi 3">
+        <div class="gallery-caption">Kompetisi Olahraga Antar Kelas</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto4.jpg" alt="Dokumentasi 4">
+        <div class="gallery-caption">Workshop Keterampilan</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto8.jpg" alt="Dokumentasi 8">
+        <div class="gallery-caption">Kegiatan Ekstrakurikuler</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto9.jpg" alt="Dokumentasi 9">
+        <div class="gallery-caption">Kunjungan Industri</div>
+      </div>
+      <div class="gallery-item">
+        <img src="galeri/foto10.jpg" alt="Dokumentasi 10">
+        <div class="gallery-caption">Pentas Seni Tahunan</div>
+      </div>
+    </div>
+    
+    <div class="scroll-hint">
+      <div class="scroll-up">
+        <div class="arrow up"></div>
+        <p>Scroll ke Atas untuk Informasi</p>
+      </div>
+      <div class="scroll-down">
+        <p>Scroll ke Bawah untuk Kontak</p>
+        <div class="arrow down"></div>
+      </div>
     </div>
   </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 SMKN 5 Gowa - Siap Kerja, Cerdas, dan Kompetitif</p>
+  </footer>
+
+  <script>
+    // Animasi untuk galeri dengan scroll effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const navButtons = document.querySelectorAll('.nav-button');
+      
+      function checkScroll() {
+        galleryItems.forEach(item => {
+          const itemTop = item.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (itemTop < windowHeight * 0.85) {
+            item.style.opacity = '1';
+          }
+        });
+      }
+      
+      // Animasi hover untuk tombol navigasi
+      navButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(-3px)';
+          }
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(0)';
+          }
+        });
+      });
+      
+      // Jalankan saat halaman dimuat
+      checkScroll();
+      
+      // Jalankan saat scrolling
+      window.addEventListener('scroll', checkScroll);
+
+      // Inisialisasi variabel untuk melacak status scroll
+      let lastScrollTop = 0;
+      let scrollTimeout;
+      let isNavigating = false;
+      
+      // Fungsi untuk menangani auto-scroll navigation
+      window.addEventListener('scroll', function() {
+        // Jika sedang dalam proses navigasi, abaikan event scroll
+        if (isNavigating) return;
+        
+        // Clear timeout sebelumnya
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(function() {
+          // Dapatkan posisi scroll saat ini
+          const st = window.pageYOffset || document.documentElement.scrollTop;
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+          
+          // Deteksi scroll ke bawah di akhir halaman
+          if (st > lastScrollTop && st + windowHeight >= documentHeight - 50) {
+            // Scroll ke bawah dan hampir di akhir halaman
+            isNavigating = true;
+            
+            // Tambahkan animasi transisi sebelum navigasi
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(function() {
+              // Navigasi ke halaman berikutnya (Kontak)
+              window.location.href = 'community.html';
+            }, 500);
+          } 
+          // Deteksi scroll ke atas di awal halaman
+          else if (st < lastScrollTop && st <= 50) {
+            // Scroll ke atas dan hampir di awal halaman
+            isNavigating = true;
+            
+            // Tambahkan animasi transisi sebelum navigasi
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(function() {
+              // Navigasi ke halaman sebelumnya (Informasi)
+              window.location.href = 'features.html';
+            }, 500);
+          }
+          
+          // Perbarui variabel lastScrollTop
+          lastScrollTop = st <= 0 ? 0 : st;
+        }, 100); // Delay untuk menghindari trigger berlebihan
+      });
+
+      // Animasi tambahan saat halaman dimuat
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 200);
+    });
+  </script>
 </body>
 </html>
